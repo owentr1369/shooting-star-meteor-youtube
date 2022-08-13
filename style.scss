@@ -1,0 +1,70 @@
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  background-image: url(https://3.bp.blogspot.com/-CBkeyJkASJY/XFUltC8eOEI/AAAAAAAABz0/Dlf9jd3RMPQKSz_G63SgYDiC53NmYNdywCKgBGAs/w0/night-sky-stars-scenery-landscape-21-4K.jpg);
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+$n: 25;
+$s: 300;
+
+$shadow: ();
+@for $i from 1 through $s {
+  $x: random(1920);
+  $y: random(1000);
+  $shadow: $shadow, ($x + px $y + px #fff) !global;
+}
+
+.star {
+  width: 1px;
+  height: 1px;
+  background-color: transparent;
+  box-shadow: $shadow;
+}
+
+@for $i from 1 through $n {
+  $v: random(90) + 9;
+  $h: random(250) + 50;
+  $d: random(300) / 10 + 3;
+  .meteor-#{$i} {
+    position: absolute;
+    top: $h + px;
+    left: $v * 1%;
+    width: 300px;
+    height: 1px;
+    transform: rotate(-45deg);
+    background-image: linear-gradient(to right, #fff, rgba(255, 255, 255, 0));
+    animation: meteor $d + s linear infinite;
+    &::before {
+      content: "";
+      position: absolute;
+      width: 4px;
+      height: 5px;
+      border-radius: 50%;
+      margin-top: -2px;
+      background: rgba($color: #fff, $alpha: 0.7);
+      box-shadow: 0 0 15px 3px #fff;
+    }
+  }
+}
+
+@keyframes meteor {
+  0% {
+    opacity: 1;
+    margin-top: -300px;
+    margin-right: -300px;
+  }
+  12% {
+    opacity: 0;
+  }
+  15% {
+    margin-top: 300px;
+    margin-left: -600px;
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
